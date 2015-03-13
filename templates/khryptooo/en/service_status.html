@@ -1,0 +1,33 @@
+{% extends "khryptooo/base_en.html" %}
+{% block title %}
+khrypt.ooo | Service status
+{% endblock title %}
+{% block content %}
+<div id="features">
+	<div class="container">
+		<div class="row">
+			<h1 class="centered">Service status</h1>
+			<div class="col-lg-8 col-lg-offset-2">
+				<p>We operate various privacy enhancing services in Cambodia. This page indicates the status of each service. Data displayed on this page is pulled from our backend in 60 second intervals.</p>
+				<p>For more information about how to utilize our services please consult our guides.</p>
+			</div>
+		</div>
+		<hr/>
+		<div class="jumbotron">
+			<h2>Jabber</h2>
+			<p>Network: {{jabber_status}}</p>
+			<p>Battery: {{ups_status}} ({{ups_charge}}%)</p>
+		</div>
+		<hr/>
+		<div class="jumbotron">
+			<h2>Tor relay</h2>
+			<p>Network: {{tor_status}}{% if tor_info.running %} <small>({{tor_info.net_out}} uploaded and {{tor_info.net_in}} downloaded since last reboot)</small>{% endif %}</p>
+			<p>Battery: {{ups_status}} ({{ups_charge}}%)</p>
+			{% if tor_info.running %}
+			<p>Flags: {% for flag in tor_info.flags %} <img src="https://khrypt.ooo/static/img/tor_{{flag}}.png" /> <small>{{flag}}</small> {% endfor %}</p>
+			<p>Consensus weight: {{tor_info.bandwidth}}</p>
+			{% endif %}
+		</div>
+	</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,65 @@
+{% load url from future %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		{% block head %}
+			<title>{% block title %}khrypt.ooo{% endblock %}</title>
+			{% block meta %}
+				<meta charset="utf-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<meta name="description" content="We provide security and privacy in Cambodia so the press can do its job.">
+			{% endblock %}
+			<link href="https://khrypt.ooo/static/css/bootstrap.css" rel="stylesheet">
+			<link href="https://khrypt.ooo/static/css/main.css" rel="stylesheet">
+			<link href="https://khrypt.ooo/static/css/lato.css" rel="stylesheet" type="text/css">
+			<link href="https://khrypt.ooo/static/css/raleway.css" rel='stylesheet' type='text/css'>
+		{% endblock %}
+	</head>
+	<body>
+		<div id="navigation" class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="https://khrypt.ooo/"><b>khrypt.ooo</b></a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li{% ifequal selected 'index' %} class="active" {% endifequal %}><a href="https://khrypt.ooo/">Home</a></li>
+						<li class="dropdown{% ifequal selected 'services' %} active {% endifequal %}">
+					        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Services<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="https://khrypt.ooo/en/service/jabber/">Instant messaging</a></li>
+								<!-- <li><a href="#">Web proxy</a></li> -->
+								<li><a href="https://khrypt.ooo/en/service/tor/">Tor relay</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
+					        <a data-toggle="dropdown" class="dropdown-toggle" href="#">Guides<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="#">Jabber</a></li>
+								<li><a href="#">Tor</a></li>
+							</ul>
+						</li>
+
+						<li{% ifequal selected 'service_status' %} class="active" {% endifequal %}><a href="/en/service-status/">Service status</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		{% block content %}
+		{% endblock %}
+		<div id="c">
+			<div class="container">
+				<a href="http://telecomix.org/" target="_blank"><img src="https://khrypt.ooo/static/img/300px-cryptoidmonkies-inverted.gif" alt="Cryptoid Monkeys" /></a>
+				<a href="http://kopimi.com/" target="_blank"><img src="https://khrypt.ooo/static/img/cpyramid_kopimi2.gif" alt="Kopimi" /></a>
+			</div>
+		</div>
+		<script src="https://khrypt.ooo/static/js/jquery.min.js"></script>
+	    <script src="https://khrypt.ooo/static/js/bootstrap.js"></script>
+	</body>
+</html>
