@@ -1,0 +1,85 @@
+{% extends "khryptooo/base_en.html" %}
+{% block title %}
+khrypt.ooo | Off-the-Record Messaging
+{% endblock title %}
+{% block content %}
+<div id="features">
+	<div class="container">
+		<div class="row">
+			<h1 class="centered">Off-the-Record Messaging</h1>
+			<div class="col-lg-8 col-lg-offset-2">
+				<ul>
+					<li><strong>Encryption</strong> No one else can read your instant messages.</li>
+					<li><strong>Authentication</strong> You are assured the correspondent is who you think it is.</li>
+					<li><strong>Deniability</strong> The messages you send do <i>not</i> have digital signatures that are checkable by a third party. Anyone can forge messages after a conversation to make them look like they came from you. However, <i>during</i> a conversation, your correspondent is assured the messages he sees are authentic and unmodified.</li>
+					<li><strong>Perfect forward secrecy</strong> If you lose control of your private keys, no previous conversation is compromised.</li>
+				</ul>
+				<p>Jabber is an extensible near real-time text-based instant messaging protocol. Unlike most instant messaging protocols, it is defined in an open standard and uses an open systems approach of development and application, by which anyone may implement a Jabber service and interoperate with other organizations' implementations.</p>
+				<p>For your safety, our Jabber service is configured to drop unencrypted messages. We don't allow plaintext messages to travel through our network because that would make it possible for us to compromise the privacy and integrity of your private conversations.</p>
+				<p>Off-the-Record Messaging (OTR) is a cryptographic protocol that provides encryption for instant messaging conversations. The primary motivation behind the protocol was providing deniable authentication for the conversation participants while keeping conversations confidential, like a private conversation in real life, or off the record in journalism sourcing. In addition to authentication and encryption, OTR provides forward secrecy and malleable encryption.</p>
+				<hr/>
+			</div>
+			<div class="col-lg-8 col-lg-offset-2">
+				<a name="signup"></a>
+				<a href="#signup"><h2 class="centered">Sign Up</h2></a>
+				<p>Please pick a username which does not reveal your identity. Your password should contain a high variety of characters. You should use a unique password that you do not use for any other accounts.</p>
+				<p>We do not store any information about you besides the authentication credentials entered by you in the form below.</p>
+					<div class="input-group">
+						<input type="text" placeholder="Username" class="form-control input-lg" aria-describedby="basic-addon1" id="jabber_username">
+						<span class="input-group-addon" id="basic-addon1">@khrypt.ooo</span>
+					</div>
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="password" id="jabber_password" class="form-control input-lg" placeholder="Password">
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6">
+							<div class="form-group">
+								<input type="password" id="jabber_password_confirm" class="form-control input-lg" placeholder="Confirm Password">
+							</div>
+						</div>
+					</div>
+					<input id="create_jabber" type="submit" value="Create Jabber account" class="btn btn-info btn-block btn-lg" onclick="jabberSignup();">
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+function jabberSignup() {
+	if($("#jabber_username").val().length < 1) {
+		alert("Your username must be at least one character.");
+		return false;
+	}
+
+	if($("#jabber_password").val().length <= 5) {
+		alert("Your password should be _at_least_ 6 characters!");
+		return false;
+	}
+
+	if($("#jabber_password").val() !== $("#jabber_password_confirm").val()) {
+		alert("The passwords you have entered don't match.");
+		return false;
+	}
+
+	$("#create_jabber").attr("disabled", "disabled");
+
+	$.post("/jabber/register/", {"username": $("#jabber_username").val(), "password": $("#jabber_password").val()}, function(data) {
+		if(data === "OK") {
+			alert("Account created successfully. You will be redirected to our guides.");
+			window.location = "https://khrypt.ooo/en/guides/jabber/";
+		}
+
+		if(data === "ERROR") {
+			alert("Failed for unknown reason. Maybe the username is already taken?");
+		}
+
+		if(data === "RESTRICTED") {
+			alert("It appears that you are not connecting from Cambodia. Our signup is limited due to limited resources, sorry.");
+		}
+
+		$("#create_jabber").removeAttr("disabled");
+	});
+}
+</script>
+{% endblock content %}

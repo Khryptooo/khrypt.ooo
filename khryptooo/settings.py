@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'web_en',
+    'jabber',
 )
 
 MIDDLEWARE_CLASSES = (

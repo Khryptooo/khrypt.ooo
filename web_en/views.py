@@ -15,6 +15,16 @@ def torService(request):
     context = RequestContext(request, {"selected": "services"})
     return HttpResponse(template.render(context))
 
+def privacyPolicy(request):
+    template = loader.get_template("khryptooo/en/privacy_policy.html")
+    context = RequestContext(request, {"selected": "privacy_policy"})
+    return HttpResponse(template.render(context))
+
+def jabberService(request):
+    template = loader.get_template("khryptooo/en/jabber_service.html")
+    context = RequestContext(request, {"selected": "services"})
+    return HttpResponse(template.render(context))
+
 def serviceStatus(request):
 	template = loader.get_template("khryptooo/en/service_status.html")
 	REDIS_SOCKET = getattr(settings, "REDIS_SOCKET")
