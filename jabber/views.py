@@ -26,7 +26,7 @@ def register(request):
 		return HttpResponse("RESTRICTED")
 
 	jid = xmpp.JID(username)
-	cli = xmpp.Client(jid.getDomain())
+	cli = xmpp.Client(jid.getDomain(), debug=[])
 	cli.connect()
 	xmpp.features.getRegInfo(cli, jid.getDomain(), sync=True)
 
